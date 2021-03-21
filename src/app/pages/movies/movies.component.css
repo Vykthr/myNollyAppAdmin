@@ -1,0 +1,145 @@
+.panel img {
+    height: 100px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.panel {
+    background: #222;
+    color: #fff;
+    border-radius: 10px;
+}
+.dark-modal .modal-content {
+    background-color: #222;
+    color: white;
+}
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vw;
+    width: 100vw;
+    left: 0;
+}
+.modal-backdrop.fade {
+    opacity: 0.5 !important;
+}
+.dark-modal .close {
+    color: white;
+}
+.light-blue-backdrop {
+    background-color: #000308;
+}
+.fade {
+    opacity: 1 !important;
+    transition: opacity 0.15s linear 0s !important;
+}
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out 0s !important;
+}
+.modal-dialog-centered {
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - 1rem);
+}
+.modal.show .modal-dialog {
+    transform: none;
+}
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: rgb(255, 255, 255);
+    background-clip: padding-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-image: initial;
+    border-radius: 0.3rem;
+    outline: 0px;
+}
+.modal {
+    z-index: 1050;
+}
+
+.modal-body img {
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .modal-dialog {
+        width: 800px;
+    }
+}
+
+.editForm label {
+    display: block;
+}
+.editForm input, .editForm select{
+    height: 40px;
+}
+.editForm input, .editForm select, .editForm textarea {
+    border-radius: 5px;
+    width: 100%;
+    color: #fff;
+    background-color: #222;
+    border: 1px solid #fff;
+    padding: 10px
+}
+.btn-default {
+    background: transparent;
+    color: #fff;
+    margin: auto .5rem;
+    /* border: 0; */
+}
+
+.info h4:nth-child(2) {
+    margin-top: 0 !important;
+    margin-bottom: .5rem !important;
+}
+.info h4:first-child {
+    margin-top: .5rem !important;
+    margin-bottom: 0 !important;
+}
+img {
+    cursor: pointer;
+}
+
+.custom {
+    border-radius: 5px;
+    width: 100%;
+    color: #fff;
+    background-color: #222;
+    border: 1px solid #fff;
+    padding: 10px
+}
+.custom span {
+    margin: .5rem .5rem;
+    border-radius: 5px;
+    padding: 10px;
+    display: inline-block;
+    border: 1px solid #aaa;
+    cursor: pointer;
+}
+.custom input {
+    border-radius: 5px;
+    width: 100%;
+    color: #fff;
+    background-color: #222;
+    border: 1px solid #aaa;
+    margin-bottom: 1rem;
+    padding: 10px
+}
+.selected {
+    border: 1px solid var(--danger);
+    color: #fff;
+    background: rgb(80, 1, 1);
+}
+
+.option.two {
+    cursor: initial;
+}
+.two i {
+    cursor: pointer;
+}

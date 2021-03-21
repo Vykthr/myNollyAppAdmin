@@ -1,3 +1,4 @@
+import { AuthGuard } from './services/auth/auth.guard';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'mynollyappAdmin';
+
+  constructor(public auth: AuthGuard) {
+
+  }
 }

@@ -1,0 +1,126 @@
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Add New Movie <small>(All fields with * is required)</small></h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <mat-progress-bar mode="indeterminate" style="margin-bottom: 2rem;" *ngIf="general.movieList.length < 10"></mat-progress-bar>
+
+        <div class="row">
+            <form [formGroup]="addForm" class="addForm">                      
+
+                <div class="col-md-6">
+                    <label>Movie Image *</label>
+                    <div class="img">
+                        <img src="data:image/png;base64,{{img}}" *ngIf="img; else icon" (click)="upload()">
+                        <ng-template #icon><span (click)="upload()"><i class="fa fa-camera fa-fw"></i></span></ng-template>
+                    </div>
+                    <div class="form-group">
+                        <label>Title *</label>
+                        <input formControlName="title" type="text" placeholder="Enter Movie title">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Synopsis *</label>
+                        <textarea rows="4" formControlName="description" type="text" placeholder="Enter Movie Synopsis">
+                        </textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Link *</label>
+                        <input formControlName="link" type="text" placeholder="Enter Movie link">
+                    </div>
+                
+                    <div class="form-group">
+                        <label>Link to *</label>
+                        <select formControlName="from">
+                        <option *ngFor="let from of general.froms; let i = index"  [value]="from">{{from | titlecase}}</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Trailer Link</label>
+                        <input formControlName="trailer" type="text" placeholder="Enter trailer link (Ex: L018QlgArpQ) Optional">
+                    </div>
+                    <div class="form-group">
+                        <label>Cast</label>                        
+                        <div class="custom">
+                            <input (keyup.enter)="addToList('cast', $event)" placeholder="Type in each cast's name and hit 'Enter key'">
+                            <span class="option two selected" *ngFor="let cast of addForm.value.cast; let i = index">{{cast | titlecase}} 
+                                <i class="fa fa-close fa-fw" (click)="remove(i, 'cast')"></i>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label >Producers</label>
+                        <div class="custom">
+                            <input (keyup.enter)="addToList('prod', $event)" placeholder="Type in each producer's name and hit 'Enter key'">
+                            <span class="option two selected" *ngFor="let prod of addForm.value.producers; let i = index">{{prod | titlecase}} 
+                                <i class="fa fa-close fa-fw" (click)="remove(i, 'prod')"></i>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Language *</label>
+                        <div class="custom">
+                            <input value="{{getArray(addForm.value.language) | titlecase}}" readonly placeholder="Select Language from list below" >
+                            <span class="option" [class.selected]="this.addForm.value.language.includes(language)" *ngFor="let language of general.languages" (click)="addOption(language, 'lang', $event)">{{language | titlecase}}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Genre *</label>
+                        <div class="custom">
+                            <input value="{{getArray(addForm.value.genre) | titlecase}}" readonly placeholder="Select Genre from list below" />
+                            <span class="option" [class.selected]="this.addForm.value.genre.includes(genre)" *ngFor="let genre of general.genres" (click)="addOption(genre, 'gen', $event)">{{genre | titlecase}}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Movie Type *</label>
+                        <select formControlName="type">
+                        <option *ngFor="let type of general.types"  [value]="type">{{type | titlecase}}</option>
+                        </select>
+                    </div>
+                
+                    <div class="form-group">
+                        <label>Year *</label>
+                        <select formControlName="year">
+                        <option *ngFor="let year of general.years; let i = index"  [value]="(today - i)">{{today - i}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-center" style="margin: 3rem 0 10rem">
+                    <button class="btn btn-danger" type="button" (click)="add(addForm.value)">
+                        <span *ngIf="loading" style="margin-right: 1rem;"><i class="fa fa-spinner fa-spin"></i></span>
+                        Add Movie</button>         
+                </div>
+            </form>
+        </div>
+        <!-- /.row -->
+
+        <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">{{success ? "Success!" : "Error!"}}</h4>
+            </div>
+            <div class="modal-body">
+              <p>{{success ? success : error }}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" (click)="modal.close(); this.resetForm()">Close</button>
+            </div>
+          </ng-template>
+                    
+
+    </div>
+    <!-- /.container-fluid -->
+</div>

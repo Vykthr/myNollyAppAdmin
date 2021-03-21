@@ -1,0 +1,19 @@
+.page-header {
+    color: #fff;
+}
+.panel {
+    border: 0 !important;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-top: 3rem;
+}
+.panel-heading {
+    border: 0 !important;
+    padding: 20px;
+    
+}
+.iconText div {
+    margin: 1rem .5rem .5rem;
+}

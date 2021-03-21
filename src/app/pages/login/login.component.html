@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5">
+            <img src="assets/images/logo.png" />
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Admin Login </h2>
+                    <p>Enter your admin details below</p>
+                </div>
+                <div class="panel-body">
+                    <form role="form" [formGroup]="loginForm">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" [(ngModel)]="loginForm.value.email" formControlName="email" placeholder="E-mail" name="email" type="email" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" [(ngModel)]="loginForm.value.password" formControlName="password" placeholder="Password" name="password" type="password">
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input name="remember" formControlName="checked" type="checkbox" value="Remember Me">Remember Me
+                                </label>
+                            </div>
+                            <div class="form-group" *ngIf="error">
+                                <p class="error">{{error}}</p>    
+                            </div>
+                            <!-- Change this to a button or input when using this as a form -->
+                            <a (click)="authenticate()" class="btn btn-lg btn-block" *ngIf="!loading; else load">
+                                Login
+                            </a>
+                            <ng-template #load>
+                                <a class="btn btn-lg btn-block">
+                                    <i class="fa fa-spinner fa-spin"></i>
+                                    Logging In
+                                </a>
+                            </ng-template>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

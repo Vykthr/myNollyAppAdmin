@@ -28,9 +28,11 @@
               "src/assets"
             ],
             "styles": [
+              "src/custom-theme.scss",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {
@@ -51,7 +53,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -91,6 +93,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -124,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "mynollyappAdmin"
+  "defaultProject": "mynollyappAdmin",
+  "cli": {
+    "analytics": "f4958aa5-020a-44c9-b8f8-ae23c7149584"
+  }
 }

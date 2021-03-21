@@ -1,0 +1,45 @@
+.panel-heading {
+    background: transparent;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+.row {
+    justify-content: center !important;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.panel {
+    margin: 35% auto;
+    overflow: hidden;
+    padding: 40px;
+    box-shadow: 0 20px 61px rgb(65 62 101 / 14%);
+    border-radius: 10px;
+    background-color: #293145;
+    width: 100%;
+}
+h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+.btn {
+    height: 60px;
+    border-radius: 7px;
+    background-color: #e53637;
+    padding: 0;
+    margin-top: 2rem;
+    width: 100%;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 0;
+    line-height: 60px;
+}

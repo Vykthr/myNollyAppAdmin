@@ -1,0 +1,66 @@
+.form-control {
+    padding-left: 28px;
+    margin-bottom: 20px;
+    color: #000;
+    font-size: 14px;
+    font-weight: 400;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #eae9f2;
+    background-color: #ffffff;
+}
+.panel-heading {
+    background: transparent;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+.panel-body {
+    color: #fff;
+}
+.row {
+    justify-content: center !important;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+img {
+    display: block;
+    margin: 20% auto 3rem;
+}
+.login-panel {
+    overflow: hidden;
+    padding: 40px;
+    box-shadow: 0 20px 61px rgb(65 62 101 / 14%);
+    border-radius: 10px;
+    background-color: #111111;
+    width: 100%;
+    margin-top: 0;
+}
+h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+.btn {
+    height: 60px;
+    border-radius: 7px;
+    background-color: #e53637;
+    padding: 0;
+    margin-top: 2rem;
+    width: 100%;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 0;
+    line-height: 60px;
+}
+
+.error {
+    text-align: center;
+    color: #e53637;
+}

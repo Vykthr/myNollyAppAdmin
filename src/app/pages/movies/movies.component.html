@@ -1,0 +1,158 @@
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Movies</h1>
+                <!-- <button class="btn btn-outline-primary" (click)="open(content, showing)"><i class="fa fa-pencil-square-o"></i></button> -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <mat-progress-bar mode="indeterminate" style="margin-bottom: 2rem;" *ngIf="general.movieList.length < 10"></mat-progress-bar>
+
+        <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Edit Movie</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="img">
+                          <img src="data:image/png;base64,{{img}}" *ngIf="img; else icon" >
+                          <ng-template #icon><img src={{showing?.details.img}} (click)="upload()"></ng-template>
+                          <Button class="btn btn-danger" style="margin-top: 1rem;" *ngIf="img" (click)="this.img = ''">Revert to original</Button>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                        <form [formGroup]="editForm" class="editForm">
+                            <div class="form-group">
+                              <label>Title *</label>
+                              <input formControlName="title" type="text" [(ngModel)]="showing.details.title" required>
+                            </div>
+                            
+                            <div class="form-group">
+                              <label>Synopsis *</label>
+                              <textarea rows="4" formControlName="description" [(ngModel)]="showing.details.description" type="text" required>
+                              </textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                              <label>Link *</label>
+                              <input formControlName="link" [(ngModel)]="showing.details.link" type="text" required>
+                              
+                            </div>
+                        
+                            <div class="form-group">
+                              <label>Link to *</label>
+                              <select formControlName="from" placeholder="Link to*" [(ngModel)]="showing.details.from">
+                                <option *ngFor="let from of general.froms; let i = index"  [value]="from">{{from | titlecase}}</option>
+                              </select>
+                            </div>
+                            
+                            <div class="form-group">
+                              <label>Trailer Link</label>
+                              <input formControlName="trailer" [(ngModel)]="showing.details.trailer" type="text">
+                            </div>
+                              
+                            <div class="form-group">
+                              <label>Cast</label>                        
+                              <div class="custom">
+                                  <input (keyup.enter)="addToList('cast', $event)" placeholder="Type in each cast's name and hit 'Enter key'">
+                                  <span class="option two selected" *ngFor="let cast of showing.details.cast; let i = index">{{cast | titlecase}} 
+                                      <i class="fa fa-close fa-fw" (click)="remove(i, 'cast')"></i>
+                                  </span>
+                              </div>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label >Producers</label>
+                              <div class="custom">
+                                  <input (keyup.enter)="addToList('prod', $event)" placeholder="Type in each producer's name and hit 'Enter key'">
+                                  <span class="option two selected" *ngFor="let prod of showing.details.producers; let i = index">{{prod | titlecase}} 
+                                      <i class="fa fa-close fa-fw" (click)="remove(i, 'prod')"></i>
+                                  </span>
+                              </div>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Language *</label>
+                              <div class="custom">
+                                  <input value="{{getArray(showing.details.language) | titlecase}}" readonly placeholder="Select Language from list below" >
+                                  <span class="option" [class.selected]="this.showing.details.language.includes(language)" *ngFor="let language of general.languages" (click)="addOption(language, 'lang', $event)">{{language | titlecase}}</span>
+                              </div>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Genre *</label>
+                              <div class="custom">
+                                  <input value="{{getArray(showing.details.genre) | titlecase}}" readonly placeholder="Select Genre from list below" />
+                                  <span class="option" [class.selected]="this.showing.details.genre.includes(genre)" *ngFor="let genre of general.genres" (click)="addOption(genre, 'gen', $event)">{{genre | titlecase}}</span>
+                              </div>
+                          </div>
+                            <div class="form-group">
+                              <label>Movie Type *</label>
+                              <select formControlName="type" [(ngModel)]="showing.details.type">
+                                <option *ngFor="let type of general.types"  [value]="type" required>{{type | titlecase}}</option>
+                              </select>
+                            </div>
+                        
+                            <div class="form-group">
+                              <label>Year *</label>
+                              <select formControlName="year" [(ngModel)]="showing.details.year">
+                                <option *ngFor="let year of general.years; let i = index"  [value]="(today - i)" required>{{today - i}}</option>
+                              </select>
+                            </div>
+                          </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" (click)="modal.close()">Close</button>
+              <button type="button" class="btn btn-success" (click)="update(editForm.value)">
+                <span *ngIf="loading" style="margin-right: 1rem;"><i class="fa fa-spinner fa-spin"></i></span>
+                Update Movie</button>
+            </div>
+          </ng-template>
+                    
+        <div class="row">
+            <div class="col-lg-6 col-md-12" *ngFor="let movie of general.movieList">
+                <div class="panel">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <img width="100%" src={{movie.details.img}}>
+                        </div>
+                        <div class="col-xs-8 info">
+                            <h4 class="">{{movie.details.title}}</h4>
+                            <h4 class="">{{movie.details.year}}</h4>
+                            <button class="btn btn-default btn-circle" style="margin-left: 0;" (click)="open(content, movie)"><i class="fa fa-pencil-square-o"></i></button>
+                            <button class="btn btn-default btn-circle" (click)="openAlertModal(alertContent, movie)"><i class="fa fa-trash-o"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #alertContent let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Alert!</h4>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete {{deleteOp.details.title}}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" (click)="deleteMovie(deleteOp.id);">
+              <span *ngIf="deleting" style="margin-right: 1rem;"><i class="fa fa-spinner fa-spin"></i></span>
+              
+              Yes</button>
+            <button type="button" class="btn btn-danger" (click)="modal.close();">Cancel</button>
+          </div>
+        </ng-template>
+                  
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
